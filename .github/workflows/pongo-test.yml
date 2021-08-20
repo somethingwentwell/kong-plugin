@@ -27,8 +27,14 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
+      - name: mkdir
+        run: |
+          mkdir plugin
+    
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
+        with:
+          path: plugin
       
       # Install Pongo in Pipeline agent
       - name: Install Pongo
@@ -38,8 +44,9 @@ jobs:
       # Pongo run
       - name: Run Pongo
         run: |
-          ./kong-pongo/pongo.sh lint
-          ./kong-pongo/pongo.sh run
+          cd plugin
+          ../kong-pongo/pongo.sh lint
+          ../kong-pongo/pongo.sh run
 
       # Runs a single command using the runners shell
       - name: Run a one-line script
