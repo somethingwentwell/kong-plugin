@@ -35,8 +35,10 @@ jobs:
           path: plugin
       
       # Get Pongo
-      - name: Get Pongo
-        run: git clone https://github.com/Kong/kong-pongo.git
+      - name: Get Luarocks & Pongo
+        run: |
+          sudo apt-get install -y luarocks
+          git clone https://github.com/Kong/kong-pongo.git
 
       # Pongo run
       - name: Run Pongo
@@ -44,10 +46,15 @@ jobs:
           cd plugin
           ../kong-pongo/pongo.sh lint
           ../kong-pongo/pongo.sh run
+          
+      # Pongo run
+      - name: Make rock
+        run: |
+          cd plugin
+          luarocks make --pack-binary-rock
 
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v2.2.4
         with:
           path: |
             plugin/*.rock
-            plugin/*.rockspecs
