@@ -15,8 +15,6 @@ on:
 
 env:
   KONG_VERSION: 2.4.1.x
-  POSTGRES: latest
-  CASSANDRA: latest
   KONG_LICENSE_DATA: ${{ secrets.KONG_LICENSE_DATA }}
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
