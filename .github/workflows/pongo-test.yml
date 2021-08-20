@@ -26,20 +26,17 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      - name: mkdir
-        run: |
-          echo $KONG_LICENSE_DATA
-          mkdir plugin
+      - name: Make directory for checkout
+        run: mkdir plugin
     
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
         with:
           path: plugin
       
-      # Install Pongo in Pipeline agent
-      - name: Install Pongo
-        run: |
-          git clone https://github.com/Kong/kong-pongo.git
+      # Get Pongo
+      - name: Get Pongo
+        run: git clone https://github.com/Kong/kong-pongo.git
 
       # Pongo run
       - name: Run Pongo
@@ -48,12 +45,9 @@ jobs:
           ../kong-pongo/pongo.sh lint
           ../kong-pongo/pongo.sh run
 
-      # Runs a single command using the runners shell
-      - name: Run a one-line script
-        run: echo Hello, world!
-
-      # Runs a set of commands using the runners shell
-      - name: Run a multi-line script
-        run: |
-          echo Add other actions to build,
-          echo test, and deploy your project.
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v2.2.4
+        with:
+          path: |
+            *.rock
+            *.rockspecs
