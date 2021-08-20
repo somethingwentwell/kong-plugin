@@ -49,5 +49,5 @@ jobs:
         uses: actions/upload-artifact@v2.2.4
         with:
           path: |
-            *.rock
-            *.rockspecs
+            plugin/*.rock
+            plugin/*.rockspecs
