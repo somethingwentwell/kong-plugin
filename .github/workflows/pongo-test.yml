@@ -30,6 +30,7 @@ jobs:
     steps:
       - name: mkdir
         run: |
+          echo $KONG_LICENSE_DATA
           mkdir plugin
     
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
