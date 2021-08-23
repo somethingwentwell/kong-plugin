@@ -47,12 +47,13 @@ jobs:
           ../kong-pongo/pongo.sh lint
           ../kong-pongo/pongo.sh run
           
-      # Pongo run
+      # Build artifact
       - name: Make rock
         run: |
           cd plugin
           luarocks make --pack-binary-rock
-
+          
+      # Upload Artifact to GitHub
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v2.2.4
         with:
